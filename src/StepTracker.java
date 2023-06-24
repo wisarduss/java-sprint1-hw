@@ -26,8 +26,8 @@ public class StepTracker {
         int sumSteps = monthData.sumStepsFromMonth();
         System.out.println("Количество пройденных шагов по дням");
         monthData.printDaysAndStepsFromMonth();
-        System.out.println("общее количество шагов за месяц: " + monthData.sumStepsFromMonth());
-        System.out.println("максимальное пройденное количество шагов в месяце: " + sumSteps);
+        System.out.println("общее количество шагов за месяц: " + sumSteps);
+        System.out.println("максимальное пройденное количество шагов в месяце: " + monthData.maxSteps());
         System.out.println("среднее количество шагов: " + sumSteps/ monthData.days.length);
         System.out.println("пройденная дистанция (в км): " + converter.convertToKm(sumSteps));
         System.out.println("количество сожжённых килокалорий: " + converter.convertStepsToKilocalories(sumSteps));
@@ -64,7 +64,7 @@ public class StepTracker {
         System.out.println("Введите новую цель по количеству шагов");
         int newGoalByStepsPerDay = scanner.nextInt();
         if (newGoalByStepsPerDay <= 0) {
-            System.out.println("Количество шагов не может быть отрицательным!");
+            System.out.println("Количество шагов не может быть отрицательным, либо же равным нулю!");
             return;
         } else if (newGoalByStepsPerDay == goalByStepsPerDay) {
             System.out.println("У вас уже задано такое количество шагов");
