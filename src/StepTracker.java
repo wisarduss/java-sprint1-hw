@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class StepTracker {
     int goalByStepsPerDay = 10000;
-    Converter converter = new Converter();
-    MonthData[] monthToData = new MonthData[12];
-    Scanner scanner;
+    private final Converter converter = new Converter();
+    private final MonthData[] monthToData = new MonthData[12];
+    private final Scanner scanner;
 
-    StepTracker(Scanner scan) {
-        scanner = scan;
+    StepTracker(Scanner scanner) {
+        this.scanner = scanner;
 
 
         for (int i = 0; i < monthToData.length; i++) {
@@ -18,7 +18,7 @@ public class StepTracker {
     void printStatistic() {
         System.out.println("Введите месяц.");
         int month = scanner.nextInt();
-        if (month < 0 || month > 12) {
+        if (month < 1 || month > 12) {
             System.out.println("Такого месяца не существует!");
             return;
         }
@@ -27,8 +27,8 @@ public class StepTracker {
         System.out.println("Количество пройденных шагов по дням");
         monthData.printDaysAndStepsFromMonth();
         System.out.println("общее количество шагов за месяц: " + monthData.sumStepsFromMonth());
-        System.out.println("максимальное пройденное количество шагов в месяце: " + monthData.maxSteps());
-        System.out.println("среднее количество шагов: " + sumSteps/30);
+        System.out.println("максимальное пройденное количество шагов в месяце: " + sumSteps);
+        System.out.println("среднее количество шагов: " + sumSteps/ monthData.days.length);
         System.out.println("пройденная дистанция (в км): " + converter.convertToKm(sumSteps));
         System.out.println("количество сожжённых килокалорий: " + converter.convertStepsToKilocalories(sumSteps));
         System.out.println("лучшая серия: " + monthData.bestSeries(goalByStepsPerDay));
@@ -63,7 +63,7 @@ public class StepTracker {
     void changeStepGoal() {
         System.out.println("Введите новую цель по количеству шагов");
         int newGoalByStepsPerDay = scanner.nextInt();
-        if (newGoalByStepsPerDay < 0) {
+        if (newGoalByStepsPerDay <= 0) {
             System.out.println("Количество шагов не может быть отрицательным!");
             return;
         } else if (newGoalByStepsPerDay == goalByStepsPerDay) {

@@ -9,18 +9,17 @@ public class MonthData {
 
     int sumStepsFromMonth(){
         int sum = 0;
-        for (int i = 0; i < days.length; i++)
-        {
-           sum += days[i];
+        for (int day : days) {
+            sum += day;
         }
         return sum;
     }
 
     int maxSteps(){
         int maxSteps = 0;
-        for (int i = 0; i < days.length; i++){
-            if (days[i] > maxSteps){
-                maxSteps = days[i];
+        for (int day : days) {
+            if (day > maxSteps) {
+                maxSteps = day;
             }
         }
         return maxSteps;
@@ -29,15 +28,18 @@ public class MonthData {
     int bestSeries(int goalByStepsPerDay){
         int currentSeries = 0;
         int finalSeries = 0;
-        for (int i = 0; i < days.length; i++){
-            if (days[i] >= goalByStepsPerDay){
+        for (int day : days) {
+            if (day >= goalByStepsPerDay) {
                 currentSeries++;
-            } else{
-                if(currentSeries > finalSeries){
+            } else {
+                if (currentSeries > finalSeries) {
                     finalSeries = currentSeries;
                 }
                 currentSeries = 0;
             }
+        }
+        if (currentSeries > finalSeries){
+            finalSeries = currentSeries;
         }
         return finalSeries;
     }
